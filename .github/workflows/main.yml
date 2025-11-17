@@ -28,6 +28,7 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Compilar y ejecutar pruebas
+        working-directory: ./tyvs-tienda-ropa
         run: mvn -B clean verify
 
       - name: Subir reporte Surefire como artefacto
@@ -35,4 +36,4 @@ jobs:
         if: always()
         with:
           name: surefire-reports
-          path: target/surefire-reports
+          path: tyvs-tienda-ropa/target/surefire-reports
