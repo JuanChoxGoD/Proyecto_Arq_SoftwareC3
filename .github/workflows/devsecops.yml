@@ -34,11 +34,10 @@ jobs:
       - name: Install Snyk
         run: npm install -g snyk
 
-      - name: Authenticate Snyk
-        run: snyk auth ${{ secrets.SNYK_TOKEN }}
-
       - name: Snyk test on Maven project
         working-directory: ./tyvs-tienda-ropa
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         run: snyk test --severity-threshold=medium
 
   sonar:
