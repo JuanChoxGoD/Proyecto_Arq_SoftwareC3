@@ -17,6 +17,7 @@ import edu.unisbana.tyvs_tienda_ropa.application.domain.model.Order;
 import edu.unisbana.tyvs_tienda_ropa.application.port.out.OrderRepositoryPort;
 
 class OrderUseCaseTest {
+
     @Mock
     private OrderRepositoryPort orderRepository;
 
@@ -30,9 +31,9 @@ class OrderUseCaseTest {
 
     @Test
     void shouldReturnAllOrders() {
-        List<Order> orders = Arrays.asList( 
-                new Order(1L, LocalDate.now(), 101L), 
-                new Order(2L, LocalDate.now(), 102L) 
+        List<Order> orders = Arrays.asList(
+                new Order(1L, LocalDate.now(), 101L),
+                new Order(2L, LocalDate.now(), 102L)
         );
 
         when(orderRepository.findAll()).thenReturn(orders);
@@ -45,7 +46,7 @@ class OrderUseCaseTest {
 
     @Test
     void shouldSaveOrder() {
-        Order order = new Order(null, LocalDate.now(), 500L); 
+        Order order = new Order(null, LocalDate.now(), 500L);
         Order saved = new Order(3L, order.getOrderDate(), order.getCustomerId());
 
         when(orderRepository.save(order)).thenReturn(saved);
@@ -55,6 +56,16 @@ class OrderUseCaseTest {
         assertNotNull(result.getId());
         verify(orderRepository).save(order);
     }
-}
 
-    
+    //  NUEVO TEST NEGATIVO 
+    @Test
+    void shouldThrowExceptionWhenCustomerIdIsNull() {
+        Order invalidOrder = new Order(null, LocalDate.now(), null);
+
+        assertThrows(IllegalArgumentException.class, () ->
+                orderUseCase.createOrder(invalidOrder)
+        );
+
+        verify(orderRepository, never()).save(any());
+    }
+}

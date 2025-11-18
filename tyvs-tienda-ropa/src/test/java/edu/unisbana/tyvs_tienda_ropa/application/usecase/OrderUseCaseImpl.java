@@ -20,6 +20,12 @@ public class OrderUseCaseImpl implements OrderUseCase {
 
     @Override
     public Order createOrder(Order order) {
+
+        //  VALIDACIÓN AÑADIDA 
+        if (order.getCustomerId() == null) {
+            throw new IllegalArgumentException("customerId cannot be null");
+        }
+
         return orderRepository.save(order);
     }
 

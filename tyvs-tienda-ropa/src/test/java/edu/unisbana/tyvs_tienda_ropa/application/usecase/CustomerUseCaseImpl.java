@@ -9,7 +9,7 @@ import edu.unisbana.tyvs_tienda_ropa.application.domain.model.Customer;
 import edu.unisbana.tyvs_tienda_ropa.application.port.in.CustomerUseCase;
 import edu.unisbana.tyvs_tienda_ropa.application.port.out.CustomerRepositoryPort;
 
-@Service  // ⬅⬅⬅ NECESARIO para que Spring cree este bean
+@Service 
 public class CustomerUseCaseImpl implements CustomerUseCase {
 
     private final CustomerRepositoryPort customerRepository;
@@ -20,6 +20,12 @@ public class CustomerUseCaseImpl implements CustomerUseCase {
 
     @Override
     public Customer createCustomer(Customer customer) {
+
+        //  Validación para que pase test negativo
+        if (customer.getName() == null || customer.getName().isBlank()) {
+            throw new IllegalArgumentException("El nombre no puede estar vacío");
+        }
+
         return customerRepository.save(customer);
     }
 

@@ -18,8 +18,22 @@ public class ProductUseCaseImpl implements ProductUseCase {
         this.productRepository = productRepository;
     }
 
+    // ---- VALIDACIÓN MÍNIMA ----
+    private void validate(Product product) {
+        if (product.getName() == null || product.getName().trim().isEmpty()) {
+            throw new IllegalArgumentException("El nombre del producto es obligatorio");
+        }
+        if (product.getPrice() <= 0) {
+            throw new IllegalArgumentException("El precio debe ser mayor que 0");
+        }
+        if (product.getStock() < 0) {
+            throw new IllegalArgumentException("El stock no puede ser negativo");
+        }
+    }
+
     @Override
     public Product createProduct(Product product) {
+        validate(product);
         return productRepository.save(product);
     }
 
@@ -40,6 +54,8 @@ public class ProductUseCaseImpl implements ProductUseCase {
         if (existing.isEmpty()) {
             throw new IllegalArgumentException("Product not found with id: " + id);
         }
+
+        validate(product); // <-- VALIDACIÓN TAMBIÉN AQUÍ
 
         Product toUpdate = existing.get();
         toUpdate.setName(product.getName());

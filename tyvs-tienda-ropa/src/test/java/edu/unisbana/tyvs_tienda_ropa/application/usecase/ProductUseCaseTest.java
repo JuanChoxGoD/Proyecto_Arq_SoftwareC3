@@ -30,7 +30,6 @@ class ProductUseCaseTest {
 
     @Test
     void shouldReturnAllProducts() {
-        // Los productos ahora usan solo los parámetros que sí existen en el constructor
         List<Product> products = Arrays.asList(
                 new Product("1", "Camisa", 50000.0, 10),
                 new Product("2", "Pantalón", 80000.0, 5) 
@@ -46,11 +45,8 @@ class ProductUseCaseTest {
 
     @Test
     void shouldSaveProductSuccessfully() {
-        // Producto nuevo sin ID
-        Product newProduct = new Product(null, "Zapatos", 120000.0, 8); 
-
-        // Producto guardado con ID asignado
-        Product savedProduct = new Product("3", "Zapatos", 120000.0, 8); 
+        Product newProduct = new Product(null, "Zapatos", 120000.0, 8);
+        Product savedProduct = new Product("3", "Zapatos", 120000.0, 8);
 
         when(productRepository.save(newProduct)).thenReturn(savedProduct);
 
@@ -59,5 +55,15 @@ class ProductUseCaseTest {
         assertNotNull(result.getId());
         assertEquals("Zapatos", result.getName());
         verify(productRepository, times(1)).save(newProduct);
+    }
+
+    //  TEST NEGATIVO AÑADIDO (lo único nuevo)
+    @Test
+    void shouldThrowExceptionWhenPriceIsInvalid() {
+        Product invalid = new Product(null, "Correa", -20000.0, 5);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            productUseCase.createProduct(invalid);
+        });
     }
 }

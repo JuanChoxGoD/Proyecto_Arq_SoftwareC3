@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -30,7 +31,7 @@ class CustomerUseCaseTest {
 
     @Test
     void shouldReturnAllCustomers() {
-        List<Customer> customers = Arrays.asList(
+        List<Customer> customers = Arrays.asList(  
                 new Customer(1L, "Majo", "majo@example.com"),
                 new Customer(2L, "Juan", "juan@example.com")
         );
@@ -54,5 +55,39 @@ class CustomerUseCaseTest {
 
         assertEquals("Ana", result.getName());
         verify(customerRepository).save(customer);
+    }
+
+    // -------------------------------
+    //  TEST AVANZADO 1: Validación negativa
+    // -------------------------------
+    @Test
+    void shouldThrowExceptionWhenNameIsEmpty() {
+        Customer invalid = new Customer(null, "", "correo@example.com");
+
+        assertThrows(IllegalArgumentException.class,
+            () -> customerUseCase.createCustomer(invalid)
+        );
+
+        verify(customerRepository, never()).save(any());
+    }
+
+    // -------------------------------
+    //  TEST AVANZADO 2: ArgumentCaptor
+    // -------------------------------
+    @Test
+    void shouldCaptureCustomerSentToRepository() {
+        Customer customer = new Customer(null, "Carlos", "carlos@example.com");
+        Customer saved = new Customer(10L, "Carlos", "carlos@example.com");
+
+        when(customerRepository.save(any())).thenReturn(saved);
+
+        customerUseCase.createCustomer(customer);
+
+        ArgumentCaptor<Customer> captor = ArgumentCaptor.forClass(Customer.class);
+        verify(customerRepository).save(captor.capture());
+
+        Customer captured = captor.getValue();
+        assertEquals("Carlos", captured.getName());
+        assertEquals("carlos@example.com", captured.getEmail());
     }
 }
