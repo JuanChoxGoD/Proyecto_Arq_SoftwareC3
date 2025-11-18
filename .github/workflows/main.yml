@@ -1,4 +1,4 @@
-name: CI - Tyvs Tienda Ropa
+name: CI + SonarQube - Tyvs Tienda Ropa
 
 on:
   push:
@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Checkout del repositorio
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # Necesario para SonarQube
 
       - name: Configurar Java 17
         uses: actions/setup-java@v4
@@ -36,10 +38,14 @@ jobs:
         if: always()
         with:
           name: surefire-reports
-          path: tyvs-tienda-ropa/target/surefire-report
+          path: tyvs-tienda-ropa/target/surefire-reports
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v2
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
+        with:
+          args: >
+            -Dsonar.projectKey=JuanChoxGoD_Proyecto_Arq_SoftwareC3
+            -Dsonar.organization=tuOrganizacionSonarCloud
+            -Dsonar.host.url=https://sonarcloud.io
