@@ -5,6 +5,7 @@ import static org.mockito.Mockito.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -45,7 +46,6 @@ class OrderControllerTest {
     @Test
     void shouldCreateOrder() {
         Order order = new Order(1L, LocalDate.now(), 10L);
-
         when(orderUseCase.createOrder(order)).thenReturn(order);
 
         ResponseEntity<Order> response = controller.createOrder(order);
@@ -53,5 +53,50 @@ class OrderControllerTest {
         assertEquals(201, response.getStatusCode().value());
         assertEquals(1L, response.getBody().getId());
         verify(orderUseCase).createOrder(order);
+    }
+
+    @Test
+    void shouldReturnOrderById() {
+        Order order = new Order(1L, LocalDate.now(), 10L);
+        when(orderUseCase.getOrderById("1")).thenReturn(Optional.of(order));
+
+        ResponseEntity<Order> response = controller.getOrderById("1");
+
+        assertEquals(200, response.getStatusCode().value());
+        assertEquals(1L, response.getBody().getId());
+        verify(orderUseCase).getOrderById("1");
+    }
+
+    @Test
+    void shouldReturn404IfOrderNotFound() {
+        when(orderUseCase.getOrderById("999")).thenReturn(Optional.empty());
+
+        ResponseEntity<Order> response = controller.getOrderById("999");
+
+        assertEquals(404, response.getStatusCode().value());
+        assertNull(response.getBody());
+        verify(orderUseCase).getOrderById("999");
+    }
+
+    @Test
+    void shouldUpdateOrder() {
+        Order order = new Order(1L, LocalDate.now(), 10L);
+        when(orderUseCase.updateOrder("1", order)).thenReturn(order);
+
+        ResponseEntity<Order> response = controller.updateOrder("1", order);
+
+        assertEquals(200, response.getStatusCode().value());
+        assertEquals(1L, response.getBody().getId());
+        verify(orderUseCase).updateOrder("1", order);
+    }
+
+    @Test
+    void shouldDeleteOrder() {
+        doNothing().when(orderUseCase).deleteOrder("1");
+
+        ResponseEntity<Void> response = controller.deleteOrder("1");
+
+        assertEquals(204, response.getStatusCode().value());
+        verify(orderUseCase).deleteOrder("1");
     }
 }

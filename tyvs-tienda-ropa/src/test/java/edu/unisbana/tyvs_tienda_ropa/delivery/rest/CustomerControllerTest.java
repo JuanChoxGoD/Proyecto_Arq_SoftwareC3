@@ -71,4 +71,28 @@ class CustomerControllerTest {
         assertEquals("Majo", response.getBody().getName()); //Potential null pointer access: The method getBody() may return nullJava(536871831)
         verify(customerUseCase).getCustomerById(1L);
     }
+
+    @Test
+    void shouldReturnEmptyListIfNoCustomers() {
+        when(customerUseCase.getAllCustomers()).thenReturn(List.of());
+
+        ResponseEntity<List<Customer>> response = controller.getAllCustomers();
+
+        assertEquals(200, response.getStatusCode().value());
+        assertNotNull(response.getBody());
+        assertTrue(response.getBody().isEmpty());
+        verify(customerUseCase).getAllCustomers();
+    }
+
+    @Test
+    void shouldReturn404IfCustomerNotFound() {
+        when(customerUseCase.getCustomerById(999L)).thenReturn(Optional.empty());
+
+        ResponseEntity<Customer> response = controller.getCustomer(999L);
+
+        assertEquals(404, response.getStatusCode().value());
+        assertNull(response.getBody());
+        verify(customerUseCase).getCustomerById(999L);
+    }
+
 }
