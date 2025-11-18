@@ -31,6 +31,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Dar permisos a Maven Wrapper
+        run: chmod +x ./tyvs-tienda-ropa/mvnw
+
       - name: Authenticate Snyk
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
@@ -68,7 +71,7 @@ jobs:
 
       - name: Build project (required for Sonar)
         working-directory: ./tyvs-tienda-ropa
-        run: ./mvnw clean package -DskipTests
+        run: ./mvnw -B clean package -DskipTests
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v2
