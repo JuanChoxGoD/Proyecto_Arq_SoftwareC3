@@ -1,21 +1,27 @@
-# Etapa 1: Build (Construcción)
-# Usamos una imagen con Maven/Gradle para compilar
-FROM maven:3.8.5-openjdk-17 AS build
+# --- Etapa 1: Build (Construcción) ---
+FROM maven:3.9-eclipse-temurin-17 AS build
 WORKDIR /app
+
+# Copiamos archivos de dependencias y código
 COPY pom.xml .
 COPY src ./src
-# Empaquetamos la aplicación omitiendo los tests aquí (se corren en el pipeline de CI)
+
+# 1. Empaquetamos (sin tests para ir rápido en la creación de imagen)
 RUN mvn clean package -DskipTests
 
-# Etapa 2: Run (Ejecución)
-# Usamos una imagen JRE ligera para producción (Mejora seguridad y tamaño)
-FROM openjdk:17-jdk-slim
-WORKDIR /app
-# Copiamos solo el jar generado en la etapa anterior
-COPY --from=build /app/target/mi-proyecto-backend.jar app.jar
+# 2. TRUCO: Buscamos el .jar generado (excluyendo el 'original') y lo renombramos a 'app.jar'
+# Esto evita errores de "file not found" por nombres de versión
+RUN find target -name "*.jar" -not -name "*original*" -exec cp {} target/app.jar \;
 
-# Usuario no root para seguridad (Best Practice DevSecOps)
-RUN useradd -m myuser
+# --- Etapa 2: Run (Ejecución) ---
+FROM eclipse-temurin:17-jre-alpine
+WORKDIR /app
+
+# Copiamos el archivo que renombramos en la etapa anterior
+COPY --from=build /app/target/app.jar app.jar
+
+# Configuración de seguridad (Usuario no root)
+RUN addgroup -S mygroup && adduser -S myuser -G mygroup
 USER myuser
 
 EXPOSE 8080
