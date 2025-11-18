@@ -34,18 +34,13 @@ jobs:
       - name: Dar permisos a Maven Wrapper
         run: chmod +x ./tyvs-tienda-ropa/mvnw
 
-      - name: Authenticate Snyk
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        run: echo "Snyk authenticated via token"
-
-      - name: Snyk test on Maven project
+      - name: Run Snyk Test
         working-directory: ./tyvs-tienda-ropa
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         run: |
           ./mvnw dependency:tree -DoutputType=dot --batch-mode --non-recursive
-          snyk test --severity-threshold=medium --all-sub-projects
+          npx snyk test --severity-threshold=medium --all-sub-projects
 
   sonar:
     name: SAST - SonarQube Scan
@@ -71,7 +66,7 @@ jobs:
 
       - name: Build project (required for Sonar)
         working-directory: ./tyvs-tienda-ropa
-        run: ./mvnw -B clean package -DskipTests
+        run: mvn -B clean package -DskipTests
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v2
