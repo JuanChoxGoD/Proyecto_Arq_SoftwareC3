@@ -36,4 +36,10 @@ jobs:
         if: always()
         with:
           name: surefire-reports
-          path: tyvs-tienda-ropa/target/surefire-reports
+          path: tyvs-tienda-ropa/target/surefire-report
+
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v2
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
