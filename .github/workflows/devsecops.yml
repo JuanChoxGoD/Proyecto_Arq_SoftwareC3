@@ -71,7 +71,7 @@ jobs:
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         with:
-          organization: tu-org-en-sonarcloud  # <-- reemplaza por tu org
+          organization:  juanchoxgod   # <-- reemplaza por tu org
           projectKey: tyvs-tienda-ropa
           projectName: Tyvs Tienda Ropa
         env:
