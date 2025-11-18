@@ -43,7 +43,7 @@ jobs:
           npx snyk test --severity-threshold=medium --all-sub-projects
 
   sonar:
-    name: SAST - SonarQube Scan
+    name: SAST - SonarCloud Scan
     runs-on: ubuntu-latest
     needs: snyk
 
@@ -68,12 +68,14 @@ jobs:
         working-directory: ./tyvs-tienda-ropa
         run: mvn -B clean package -DskipTests
 
-      - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@v2
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        with:
+          organization: tu-org-en-sonarcloud  # <-- reemplaza por tu org
+          projectKey: tyvs-tienda-ropa
+          projectName: Tyvs Tienda Ropa
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          projectBaseDir: ./tyvs-tienda-ropa
 
   trivy:
     name: Container Scan - Trivy
