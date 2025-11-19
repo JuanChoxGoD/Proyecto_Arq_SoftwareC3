@@ -1,4 +1,4 @@
-package edu.unisbana.tyvs_tienda_ropa.application.infraestructure.persistence.adapter;
+package edu.unisbana.tyvs_tienda_ropa.application.infrastructure.persistence.adapter;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Repository;
 
 import edu.unisbana.tyvs_tienda_ropa.application.domain.model.Product;
-import edu.unisbana.tyvs_tienda_ropa.application.infraestructure.persistence.entity.ProductEntity;
-import edu.unisbana.tyvs_tienda_ropa.application.infraestructure.persistence.jpa.JpaProductRepository;
+import edu.unisbana.tyvs_tienda_ropa.application.infrastructure.persistence.entity.ProductEntity;
+import edu.unisbana.tyvs_tienda_ropa.application.infrastructure.persistence.jpa.JpaProductRepository;
 import edu.unisbana.tyvs_tienda_ropa.application.port.out.ProductRepositoryPort;
 
 @Repository

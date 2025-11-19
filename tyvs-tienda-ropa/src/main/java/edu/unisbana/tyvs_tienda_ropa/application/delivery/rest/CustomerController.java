@@ -1,4 +1,3 @@
-// src/main/java/edu/unisabana/tyvs_tienda_ropa/infrastructure/delivery/rest/CustomerController.java
 package edu.unisbana.tyvs_tienda_ropa.application.delivery.rest;
 
 import java.util.List;

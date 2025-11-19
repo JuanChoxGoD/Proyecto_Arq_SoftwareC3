@@ -1,4 +1,4 @@
-package edu.unisbana.tyvs_tienda_ropa.infraestructure.persistence.adapter;
+package edu.unisbana.tyvs_tienda_ropa.infrastructure.persistence.adapter;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
@@ -15,10 +15,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import edu.unisbana.tyvs_tienda_ropa.application.domain.model.Order;
-import edu.unisbana.tyvs_tienda_ropa.application.infraestructure.persistence.adapter.OrderRepositoryAdapter;
-import edu.unisbana.tyvs_tienda_ropa.application.infraestructure.persistence.entity.CustomerEntity;
-import edu.unisbana.tyvs_tienda_ropa.application.infraestructure.persistence.entity.OrderEntity;
-import edu.unisbana.tyvs_tienda_ropa.application.infraestructure.persistence.jpa.JpaOrderRepository;
+import edu.unisbana.tyvs_tienda_ropa.application.infrastructure.persistence.adapter.OrderRepositoryAdapter;
+import edu.unisbana.tyvs_tienda_ropa.application.infrastructure.persistence.entity.CustomerEntity;
+import edu.unisbana.tyvs_tienda_ropa.application.infrastructure.persistence.entity.OrderEntity;
+import edu.unisbana.tyvs_tienda_ropa.application.infrastructure.persistence.jpa.JpaOrderRepository;
 
 class OrderRepositoryAdapterTest {
 

@@ -1,4 +1,4 @@
-package edu.unisbana.tyvs_tienda_ropa.application.infraestructure.persistence.entity;
+package edu.unisbana.tyvs_tienda_ropa.application.infrastructure.persistence.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

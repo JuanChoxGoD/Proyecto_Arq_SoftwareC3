@@ -1,9 +1,9 @@
 // src/main/java/edu/unisabana/tyvs_tienda_ropa/infrastructure/persistence/jpa/JpaProductRepository.java
-package edu.unisbana.tyvs_tienda_ropa.application.infraestructure.persistence.jpa;
+package edu.unisbana.tyvs_tienda_ropa.application.infrastructure.persistence.jpa;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import edu.unisbana.tyvs_tienda_ropa.application.infraestructure.persistence.entity.ProductEntity;
+import edu.unisbana.tyvs_tienda_ropa.application.infrastructure.persistence.entity.ProductEntity;
 
 /**
  * Interfaz de Spring Data: Define el acceso directo a la BD (CRUD automático).

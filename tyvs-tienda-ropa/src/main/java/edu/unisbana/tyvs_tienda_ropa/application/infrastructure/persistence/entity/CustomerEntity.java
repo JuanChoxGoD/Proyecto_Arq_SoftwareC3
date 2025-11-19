@@ -1,4 +1,4 @@
-package edu.unisbana.tyvs_tienda_ropa.application.infraestructure.persistence.entity;
+package edu.unisbana.tyvs_tienda_ropa.application.infrastructure.persistence.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,21 +11,11 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "products")
-public class ProductEntity {
+@Table(name = "customers")
+public class CustomerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
-
-    private String description;
-
-    private double price;
-
-    private int stock;
-
-    private String size;
-
-    private String color;
+    private String email;
 }

@@ -1,4 +1,4 @@
-package edu.unisbana.tyvs_tienda_ropa.application.infraestructure.persistence.adapter;
+package edu.unisbana.tyvs_tienda_ropa.application.infrastructure.persistence.adapter;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -8,9 +8,9 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Repository;
 
 import edu.unisbana.tyvs_tienda_ropa.application.domain.model.Order;
-import edu.unisbana.tyvs_tienda_ropa.application.infraestructure.persistence.entity.CustomerEntity;
-import edu.unisbana.tyvs_tienda_ropa.application.infraestructure.persistence.entity.OrderEntity;
-import edu.unisbana.tyvs_tienda_ropa.application.infraestructure.persistence.jpa.JpaOrderRepository;
+import edu.unisbana.tyvs_tienda_ropa.application.infrastructure.persistence.entity.CustomerEntity;
+import edu.unisbana.tyvs_tienda_ropa.application.infrastructure.persistence.entity.OrderEntity;
+import edu.unisbana.tyvs_tienda_ropa.application.infrastructure.persistence.jpa.JpaOrderRepository;
 import edu.unisbana.tyvs_tienda_ropa.application.port.out.OrderRepositoryPort;
 
 

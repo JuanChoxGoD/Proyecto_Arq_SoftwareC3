@@ -28,7 +28,6 @@ public class Product {
         this.name = name;
         this.price = price;
         this.stock = stock;
-
         this.description = null;
         this.size = null;
         this.color = null;
@@ -39,7 +38,6 @@ public class Product {
         this.id = id;
         this.name = name;
         this.price = price;
-
         this.description = null;
         this.stock = 0;
         this.size = null;

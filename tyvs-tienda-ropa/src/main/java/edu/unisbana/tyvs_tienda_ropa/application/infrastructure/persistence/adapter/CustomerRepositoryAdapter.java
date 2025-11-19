@@ -1,5 +1,5 @@
 // src/main/java/edu/unisabana/tyvs_tienda_ropa/infrastructure/persistence/adapter/CustomerRepositoryAdapter.java
-package edu.unisbana.tyvs_tienda_ropa.application.infraestructure.persistence.adapter;
+package edu.unisbana.tyvs_tienda_ropa.application.infrastructure.persistence.adapter;
 
 
 import java.util.List;
@@ -9,8 +9,8 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Repository;
 
 import edu.unisbana.tyvs_tienda_ropa.application.domain.model.Customer;
-import edu.unisbana.tyvs_tienda_ropa.application.infraestructure.persistence.entity.CustomerEntity;
-import edu.unisbana.tyvs_tienda_ropa.application.infraestructure.persistence.jpa.JpaCustomerRepository;
+import edu.unisbana.tyvs_tienda_ropa.application.infrastructure.persistence.entity.CustomerEntity;
+import edu.unisbana.tyvs_tienda_ropa.application.infrastructure.persistence.jpa.JpaCustomerRepository;
 import edu.unisbana.tyvs_tienda_ropa.application.port.out.CustomerRepositoryPort;
 
 @Repository

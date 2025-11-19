@@ -1,4 +1,4 @@
-package edu.unisbana.tyvs_tienda_ropa.infraestructure.persistence.adapter;
+package edu.unisbana.tyvs_tienda_ropa.infrastructure.persistence.adapter;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
@@ -14,9 +14,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import edu.unisbana.tyvs_tienda_ropa.application.domain.model.Customer;
-import edu.unisbana.tyvs_tienda_ropa.application.infraestructure.persistence.adapter.CustomerRepositoryAdapter;
-import edu.unisbana.tyvs_tienda_ropa.application.infraestructure.persistence.entity.CustomerEntity;
-import edu.unisbana.tyvs_tienda_ropa.application.infraestructure.persistence.jpa.JpaCustomerRepository;
+import edu.unisbana.tyvs_tienda_ropa.application.infrastructure.persistence.adapter.CustomerRepositoryAdapter;
+import edu.unisbana.tyvs_tienda_ropa.application.infrastructure.persistence.entity.CustomerEntity;
+import edu.unisbana.tyvs_tienda_ropa.application.infrastructure.persistence.jpa.JpaCustomerRepository;
 
 class CustomerRepositoryAdapterTest {
 
