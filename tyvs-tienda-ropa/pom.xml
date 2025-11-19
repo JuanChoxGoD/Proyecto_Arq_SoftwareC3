@@ -24,16 +24,6 @@
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
 
-    <!-- Forzar versiones críticas -->
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>io.github.bonigarcia</groupId>
-                <artifactId>webdrivermanager</artifactId>
-                <version>6.1.0</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <dependencies>
         <!-- Core Spring Boot -->
