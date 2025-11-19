@@ -104,14 +104,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install k6
+      - name: Run k6 load test
         run: |
-          sudo apt-get update
-          sudo apt-get install -y gnupg software-properties-common
-          sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 379CE192D401AB61
-          echo "deb https://dl.k6.io/deb stable main" | sudo tee /etc/apt/sources.list.d/k6.list
-          sudo apt-get update
-          sudo apt-get install -y k6
-
-      - name: Run Load Test
-        run: k6 run ./tyvs-tienda-ropa/tests/load_test.js
+          docker run --rm -i \
+            -v ${{ github.workspace }}/tyvs-tienda-ropa/tests:/tests \
+            loadimpact/k6 run /tests/load_test.js
