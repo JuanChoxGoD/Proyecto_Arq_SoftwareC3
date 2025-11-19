@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tienda-ropa-deployment
+  labels:
+    app: tienda-ropa
+spec:
+  replicas: 3  # Cumple con el requisito de Escalabilidad
+  selector:
+    matchLabels:
+      app: tienda-ropa
+  template:
+    metadata:
+      labels:
+        app: tienda-ropa
+    spec:
+      containers:
+      - name: tienda-ropa-container
+        # IMPORTANTE: Usamos la v3 que acabas de compilar
+        image: mi-proyecto-fase3:v3  
+        # "Never" obliga a usar la imagen de tu PC, no busca en internet
+        imagePullPolicy: Never        
+        ports:
+        - containerPort: 8080
+        # He quitado la sección 'resources' para evitar el error CrashLoopBackOff por falta de RAM
