@@ -108,7 +108,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
-            <!--  JaCoCo: Cobertura mínima 70% -->
+            <!-- 🔹 JaCoCo: Cobertura mínima 70% -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -140,7 +140,7 @@
                                         <limit>
                                             <counter>INSTRUCTION</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>0.80</minimum>
+                                            <minimum>0.70</minimum>
                                         </limit>
                                     </limits>
                                 </rule>
@@ -151,5 +151,22 @@
             </plugin>
         </plugins>
     </build>
+
+    <!-- Profile para tests con Selenium en CI/CD -->
+    <profiles>
+        <profile>
+            <id>selenium-tests</id>
+            <activation>
+                <property>
+                    <name>runSelenium</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <properties>
+                <!-- Variable para que WebDriverManager use modo headless en CI -->
+                <selenium.headless>true</selenium.headless>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>
