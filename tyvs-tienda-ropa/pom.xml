@@ -24,6 +24,17 @@
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
 
+    <!-- Forzar versiones críticas -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.github.bonigarcia</groupId>
+                <artifactId>webdrivermanager</artifactId>
+                <version>6.1.0</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
         <!-- Core Spring Boot -->
         <dependency>
@@ -55,8 +66,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
-        <!-- MockMvc para tests REST -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
@@ -71,11 +80,10 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- WebDriverManager actualizado -->
+        <!-- WebDriverManager -->
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>6.1.0</version>
             <scope>test</scope>
         </dependency>
 
@@ -108,7 +116,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
-            <!-- 🔹 JaCoCo: Cobertura mínima 70% -->
+            <!-- JaCoCo: Cobertura mínima 70% -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -151,22 +159,5 @@
             </plugin>
         </plugins>
     </build>
-
-    <!-- Profile para tests con Selenium en CI/CD -->
-    <profiles>
-        <profile>
-            <id>selenium-tests</id>
-            <activation>
-                <property>
-                    <name>runSelenium</name>
-                    <value>true</value>
-                </property>
-            </activation>
-            <properties>
-                <!-- Variable para que WebDriverManager use modo headless en CI -->
-                <selenium.headless>true</selenium.headless>
-            </properties>
-        </profile>
-    </profiles>
 
 </project>
