@@ -80,13 +80,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- WebDriverManager -->
-        <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <scope>test</scope>
-        </dependency>
-
         <!-- Vistas HTML con Thymeleaf -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
