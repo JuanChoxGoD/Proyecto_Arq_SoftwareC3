@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tienda-ropa-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: tienda-ropa
+  ports:
+    - protocol: TCP
+      port: 80         # Puerto del navegador (http://localhost)
+      targetPort: 8080 # Puerto interno de Spring Boot
