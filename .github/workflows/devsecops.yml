@@ -95,7 +95,7 @@ jobs:
           severity: HIGH,CRITICAL
           ignore-unfixed: true
 
-  loadtest:
+  k6_load_test:
     name: Load Test - k6
     runs-on: ubuntu-latest
     needs: trivy
@@ -104,8 +104,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Run k6 load test
+      - name: Run k6 Load Test
         run: |
           docker run --rm -i \
             -v ${{ github.workspace }}/tyvs-tienda-ropa/tests:/tests \
-            grafana/k6 run /tests/load_test.js
+            grafana/k6:latest run /tests/load_test.js
